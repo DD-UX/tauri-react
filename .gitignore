@@ -1,0 +1,40 @@
+.*
+!.gitignore
+_*
+
+# --- node & rust build
+node_modules/
+target/
+
+# For this template, ignore package-lock.json
+package-lock.json
+
+# --- tauri dist build assets
+dist/js/
+dist/css/
+
+# --- No png except in dist or the app-icon.
+# For generating the app icons, npm run tauri icon src-tauri/icons/app-icon.png)
+*.png
+!dist/images/*.png
+!src-tauri/icons/app-icon.png
+
+# --- Safety net
+__pycache__/
+npm-debug.log
+report.*.json
+*.parquet
+*.map
+*.zip
+*.gz
+*.tar
+*.tgz
+*.mov
+*.mp4
+
+# images
+*.ico
+*.icns
+*.jpeg
+*.jpg
+*.icns

@@ -1,0 +1,51 @@
+[build]
+beforeBuildCommand = ""
+beforeDevCommand = ""
+devPath = "http://localhost:8080/"
+distDir = "../dist"
+
+[package]
+productName = "tauri-db"
+version = "0.1.0"
+
+[tauri.allowlist]
+all = false
+
+[tauri.bundle]
+active = true
+category = "DeveloperTool"
+copyright = ""
+externalBin = [ ]
+icon = [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+identifier = "my.tauri-db"
+longDescription = ""
+resources = [ ]
+shortDescription = ""
+targets = "all"
+
+[tauri.bundle.deb]
+depends = [ ]
+
+[tauri.bundle.macOS]
+exceptionDomain = ""
+frameworks = [ ]
+
+[tauri.bundle.windows]
+digestAlgorithm = "sha256"
+timestampUrl = ""
+
+[tauri.security]
+
+[tauri.updater]
+active = false
+
+[[tauri.windows]]
+title = "tauri-db"
+fullscreen = false
+resizable = true
