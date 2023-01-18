@@ -43,8 +43,7 @@ We recommend using `awesome-app dev` but running each command manually might hel
 - `next build && next export` - This
   will [build and export](https://nextjs.org/docs/advanced-features/static-html-export#next-export) Next.js project to
   be used by Tauri.
-- `next dev` - This will run a localhost server with the previously exported `out/` folder as root (frontend hot
-  reload).
+- `next dev` - This will run a localhost server with the previously exported `out/` folder as root.
 - `cargo build` - This will update crates.
 - In another terminal, `cargo tauri dev` - Will start the Tauri build and start the process.
 
