@@ -38,7 +38,7 @@ We recommend using `awesome-app dev` but running each command manually might hel
 IMPORTANT: Make sure to have **node.js 18** and above. 
 
 - `yarn install` - This will keep `node_modules` up to date.
-- 
+
 - `cargo tauri icon src-tauri/icons/app-icon.png` - This will build the application icons. 
 
 - `next build && next export` - This will [build and export](https://nextjs.org/docs/advanced-features/static-html-export#next-export) Next.js project to be used by Tauri.
