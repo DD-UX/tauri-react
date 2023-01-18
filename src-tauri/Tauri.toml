@@ -1,7 +1,7 @@
 [build]
 beforeBuildCommand = "" # covered at Awesome.toml
 beforeDevCommand = "" # covered at Awesome.toml
-devPath = "http://localhost:4567/" # port matches next dev -p 4567 at package.json
+devPath = "http://localhost:4567" # port matches next dev -p 4567 at package.json
 distDir = "../out" # nextjs export folder
 
 [package]

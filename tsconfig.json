@@ -25,9 +25,8 @@
     "isolatedModules": true,
     "baseUrl": "src",
     "paths": {
-      "features": [
-        "features/*"
-      ]
+      "lib": ["lib/*"],
+      "features": ["features/*"]
     },
     "incremental": true,
     "plugins": [
