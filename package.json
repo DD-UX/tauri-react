@@ -1,32 +1,33 @@
 {
-  "name": "tauri-db-base",
-  "version": "0.9.17",
-  "type": "module",
+  "name": "tauri-todo",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "tauri": "tauri",
-    "localhost": "servor dist index.html 8080 --reload",
-    "pcss": "pcss",
-    "rollup": "rollup -c",
-    "ui-build": "rollup -c & pcss",
-    "ui-dev": "rollup -c -w & pcss -w & npm run localhost",
-    "app-icons": "tauri icon src-tauri/icons/app-icon.png",
+    "dev": "next dev -p 4567",
+    "build": "next build && next export",
+    "start": "next start",
+    "lint": "next lint",
     "svg-symbols": "sketchdev"
   },
   "dependencies": {
-    "@dom-native/ui": "^0.3.0-alpha.1",
-    "@tauri-apps/api": "^1.2.0",
-    "dom-native": "^0.11.2",
-    "utils-min": "^0.2.1"
+    "@geist-ui/react": "2.2.0",
+    "@geist-ui/react-icons": "1.0.1",
+    "@next/font": "13.1.2",
+    "dayjs": "1.10.5",
+    "next": "13.1.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "styled-components": "5.3.6"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^10.0.1",
-    "@tauri-apps/cli": "^1.2.1",
-    "pcss-cli": "^0.2.8",
-    "rollup": "^3.5.0",
-    "servor": "^4.0.2",
-    "sketchdev": "^0.7.4",
-    "tslib": "^2.4.1",
-    "typescript": "^4.9.3"
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "@tauri-apps/api": "1.2.0",
+    "eslint": "8.32.0",
+    "eslint-config-next": "13.1.2",
+    "prettier": "2.2.1",
+    "typescript": "4.9.4",
+    "@types/styled-components": "5.1.26"
   }
 }

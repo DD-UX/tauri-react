@@ -6,8 +6,6 @@ _*
 node_modules/
 target/
 
-# For this template, ignore package-lock.json
-package-lock.json
 
 # --- tauri dist build assets
 dist/js/
@@ -38,3 +36,37 @@ report.*.json
 *.jpeg
 *.jpg
 *.icns
+
+
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+../next-env.d.ts
