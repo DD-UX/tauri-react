@@ -1,21 +1,26 @@
-# Rust Base App Template for AWESOME-APP
+>  **IMPORTANT** - This is a project based in Awesome app that replaces Native Web Components with NextJS.
+All the credits to [awesomeapp.org](https://awesomeapp.org) for this excelent backend in Rust with Tauri.
 
-
-Base desktop application code with Tauri, Native Web Components, and SurrealDB (follow the VMES app architecture)
 
 **See [awesomeapp.org](https://awesomeapp.org) for more info**
 
 **[Discord Awesome App](https://discord.gg/XuKWrNGKpC) for any questions, issues, or anything else**
 
-# Hot Reload dev
+---
+# Rust Base App Template for AWESOME-APP
 
-For hot-reload UI and Tauri development, run the following in your VSCode from this root folder: 
+Base desktop application code with Tauri, <del>Native Web Components</del> NextJS, and SurrealDB (follow the VMES app architecture)
+
+# <del>Hot Reload dev</del> Fast refresh dev
+
+<del>For hot-reload UI and Tauri development, run the following in your VSCode from this root folder:</del>
+[Fast refresh](https://nextjs.org/docs/basic-features/fast-refresh) is provided by NextJS, as simple as is :grin:
 
 ```sh
 awesome-app dev
 ```
 
-> **IMPORTANT** - Requires **node.js v8 and above**. 
+> **IMPORTANT** - Requires **node.js v18 or above**. 
 
 
 > This assumes `awesome-app` was installed locally (e.g., `cargo install awesome-app`)
@@ -32,26 +37,19 @@ We recommend using `awesome-app dev` but running each command manually might hel
 
 IMPORTANT: Make sure to have **node.js 18** and above. 
 
-- `npm run tauri icon src-tauri/icons/app-icon.png` - This will build the application icons. 
+- `yarn install` - This will keep `node_modules` up to date.
+- 
+- `cargo tauri icon src-tauri/icons/app-icon.png` - This will build the application icons. 
 
-- `npm run pcss` - This will build the postcss files (`src-ui/pcss/**/*.pcss`).
+- `next build && next export` - This will [build and export](https://nextjs.org/docs/advanced-features/static-html-export#next-export) Next.js project to be used by Tauri.
 
-- `npm run rollup` - This will build and package the typescript files (`src-ui/src/**/*.ts`).
+- `next dev` - This will run a localhost server with the previously exported `out/` folder as root (frontend hot reload)
 
-- `npm run localhost` - This will run a localhost server with the `dist/` folder as root (frontend hot reload)
-
-- In another terminal, `npm tauri dev` - Will start the Tauri build and start the process. 
+- `cargo build` - This will update crates. 
+- 
+- In another terminal, `cargo tauri dev` - Will start the Tauri build and start the process. 
 
 <br />
-
-# Troubleshooting
-
-- Make sure to have **node.js 18** or above.
-- If some cryptic errors, run the command above one by one. 
-- If `npm tauri dev` commands fail, try to do:
-  - `cd src-tauri`
-  - `cargo build` 
-  - This might be an important first step when using full surrealdb (i.e., with default features and not only kv-mem) 
 
 ## Requirements on fedora 36:
 
@@ -67,4 +65,4 @@ dnf install webkit2gtk3-devel.x86_64
 
 <br /><br />
 
-## Happy Coding!
+## Happy Coding! :tada: :tada: :tada:

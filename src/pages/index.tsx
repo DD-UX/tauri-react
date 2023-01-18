@@ -8,9 +8,7 @@ const HomePage: FC = () => {
       <Head>
         <title>App component</title>
       </Head>
-      <Text h1 type="default">
-        Next app is working!
-      </Text>
+      <Text h1>Next app is working!</Text>
     </>
   );
 };
