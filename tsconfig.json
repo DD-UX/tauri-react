@@ -25,9 +25,14 @@
     "isolatedModules": true,
     "baseUrl": "src",
     "paths": {
-      "lib": ["lib/*"],
-      "features": ["features/*"]
-    }
+      "lib": [
+        "lib/*"
+      ],
+      "features": [
+        "features/*"
+      ]
+    },
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",

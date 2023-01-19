@@ -1,5 +1,6 @@
 import {createContext, FC, PropsWithChildren, useEffect, useState} from 'react';
 import {Project} from 'lib/sdk/generated-models/Project';
+import useProjectsData from '../../hook/useProjectsData';
 
 type ProjectsContextProviderProps = {
   onInitialized?: () => void;
@@ -21,8 +22,8 @@ export const ProjectsContextProvider: FC<PropsWithChildren<ProjectsContextProvid
   onInitialized,
   children
 }) => {
+  const {projects, refreshProjects, isLoadingProjects} = useProjectsData();
   const [hasInitialized, setHasInitialized] = useState(false);
-  const isLoadingProjects = false;
 
   useEffect(() => {
     if (!isLoadingProjects && !hasInitialized) {
@@ -31,12 +32,15 @@ export const ProjectsContextProvider: FC<PropsWithChildren<ProjectsContextProvid
     }
   }, [isLoadingProjects]);
 
+  console.log('projects', projects);
+  console.log('isLoadingProjects', isLoadingProjects);
+
   return (
     <ProjectsContext.Provider
       value={{
-        isLoadingProjects: !hasInitialized,
-        projects: [],
-        refreshProjects() {}
+        isLoadingProjects,
+        projects,
+        refreshProjects
       }}
     >
       {children}
