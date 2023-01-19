@@ -27,13 +27,7 @@
     "paths": {
       "lib": ["lib/*"],
       "features": ["features/*"]
-    },
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    }
   },
   "include": [
     "next-env.d.ts",
