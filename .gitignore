@@ -6,16 +6,13 @@ _*
 node_modules/
 target/
 
-
-# --- tauri dist build assets
-dist/js/
-dist/css/
-
 # --- No png except in dist or the app-icon.
 # For generating the app icons, npm run tauri icon src-tauri/icons/app-icon.png)
 *.png
-!dist/images/*.png
 !src-tauri/icons/app-icon.png
+
+# --- No generated models on the front end
+src/lib/sdk/generated-models
 
 # --- Safety net
 __pycache__/
@@ -35,7 +32,6 @@ report.*.json
 *.icns
 *.jpeg
 *.jpg
-*.icns
 
 
 /.pnp

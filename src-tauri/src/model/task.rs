@@ -18,7 +18,7 @@ use ts_rs::TS;
 
 #[skip_serializing_none]
 #[derive(Serialize, TS, Debug)]
-#[ts(export, export_to = "../src-ui/src/bindings/")]
+#[ts(export, export_to = "../src/lib/sdk/generated-models/")]
 pub struct Task {
 	pub id: String,
 	pub ctime: String,
@@ -51,7 +51,7 @@ impl TryFrom<Object> for Task {
 
 #[skip_serializing_none]
 #[derive(Deserialize, TS, Debug)]
-#[ts(export, export_to = "../src-ui/src/bindings/")]
+#[ts(export, export_to = "../src/lib/sdk/generated-models/")]
 pub struct TaskForCreate {
 	pub project_id: String,
 	pub title: String,
@@ -84,7 +84,7 @@ impl Creatable for TaskForCreate {}
 
 #[skip_serializing_none]
 #[derive(Deserialize, TS, Debug)]
-#[ts(export, export_to = "../src-ui/src/bindings/")]
+#[ts(export, export_to = "../src/lib/sdk/generated-models/")]
 pub struct TaskForUpdate {
 	pub title: Option<String>,
 	pub done: Option<bool>,

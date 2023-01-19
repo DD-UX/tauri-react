@@ -17,7 +17,7 @@ use ts_rs::TS;
 // region:    --- Project
 
 #[derive(Serialize, TS, Debug)]
-#[ts(export, export_to = "../src-ui/src/bindings/")]
+#[ts(export, export_to = "../src/lib/sdk/generated-models/")]
 pub struct Project {
 	pub id: String,
 	pub name: String,
@@ -40,10 +40,9 @@ impl TryFrom<Object> for Project {
 // endregion: --- Project
 
 // region:    --- ProjectForCreate
-
 #[skip_serializing_none]
 #[derive(Deserialize, TS, Debug)]
-#[ts(export, export_to = "../src-ui/src/bindings/")]
+#[ts(export, export_to = "../src/lib/sdk/generated-models/")]
 pub struct ProjectForCreate {
 	pub name: String,
 }
@@ -63,10 +62,9 @@ impl Creatable for ProjectForCreate {}
 // endregion: --- ProjectForCreate
 
 // region:    --- ProjectForUpdate
-
 #[skip_serializing_none]
 #[derive(Deserialize, TS, Debug)]
-#[ts(export, export_to = "../src-ui/src/bindings/")]
+#[ts(export, export_to = "../src/lib/sdk/generated-models/")]
 pub struct ProjectForUpdate {
 	pub name: Option<String>,
 }

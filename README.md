@@ -45,6 +45,7 @@ We recommend using `awesome-app dev` but running each command manually might hel
   be used by Tauri.
 - `next dev` - This will run a localhost server with the previously exported `out/` folder as root.
 - `cargo build` - This will update crates.
+- `cargo test` - This will generate backend entity models into TypeScript within `src/lib/sdk/generated-models/`.
 - In another terminal, `cargo tauri dev` - Will start the Tauri build and start the process.
 
 <br />

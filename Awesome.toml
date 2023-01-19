@@ -39,6 +39,13 @@ cmd = "cargo"
 args = ["build"]
 
 [[dev.runners]]
+name = "cargo_test"
+wait_before = 2000 # wait in ms, before getting called
+working_dir = "src-tauri/"
+cmd = "cargo"
+args = ["test"]
+
+[[dev.runners]]
 name = "tauri_dev"
 wait_before = 2000 # wait in ms, before getting called
 cmd = "cargo"
