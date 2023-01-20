@@ -28,13 +28,7 @@ const ProjectsLayout: FC = () => {
         <AddProjectButton />
       </LayoutHeader>
       <LayoutContent $theme={theme} $fullWidth>
-        {isLoadingProjects ? (
-          <Loading>Loading projects</Loading>
-        ) : (
-          <Text h2 my={0}>
-            List of projects
-          </Text>
-        )}
+        {isLoadingProjects && <Loading>Loading projects</Loading>}
         <ProjectsListWrapper $theme={theme}>
           {projects?.map((project) => (
             <ProjectListItem key={project.id} project={project} />

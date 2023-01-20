@@ -17,7 +17,10 @@ const ProjectListItemWrapper = styled.div<GeistThemeProps>`
   gap: ${({$theme}) => $theme.layout.gapHalf};
   padding: ${({$theme}) => $theme.layout.gapQuarter};
   align-items: center;
-  border-block-start: 0.0625rem solid ${({$theme}) => $theme.palette.border};
+
+  & + & {
+    border-block-start: 0.0625rem solid ${({$theme}) => $theme.palette.border};
+  }
 
   a {
     text-decoration: none;
