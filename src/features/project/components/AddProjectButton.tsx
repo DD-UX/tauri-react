@@ -1,7 +1,7 @@
 import {FC, useState} from 'react';
 import {Button, Keyboard, KeyCode, KeyMod, Spacer, useKeyboard} from '@geist-ui/react';
 import Plus from '@geist-ui/react-icons/plus';
-import AddProjectForm from './AddProjectForm';
+import AddProjectForm from 'features/project/components/AddProjectForm';
 
 const AddProjectButton: FC = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);

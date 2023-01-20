@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import Head from 'next/head';
 import {ProjectsContextProvider} from 'features/app/context/pages/ProjectsContext';
-import ProjectDetailLayout from '../../features/project/components/ProjectDetailLayout';
+import ProjectDetailLayout from 'features/project/components/ProjectDetailLayout';
 
 const ProjectDetailPage: FC = () => {
   return (
