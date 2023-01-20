@@ -1,5 +1,5 @@
 import {FC, useContext, useState} from 'react';
-import {Button, useTheme, useToasts} from '@geist-ui/react';
+import {Button, Link, useTheme, useToasts} from '@geist-ui/react';
 import {Project} from 'lib/sdk/generated-models/Project';
 import styled from 'styled-components';
 import {GeistThemeProps} from 'lib/geist/geist-theme-models';
@@ -7,13 +7,21 @@ import XIcon from '@geist-ui/react-icons/x';
 import dayjs from 'dayjs';
 import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
 import deleteProject from 'lib/sdk/methods/project/delete-project';
+import NextLink from 'next/link';
+import EllipsisText from 'features/app/components/common/EllipsisText';
 
 const ProjectListItemWrapper = styled.div<GeistThemeProps>`
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: minmax(0, 1fr) 5rem 2.5rem;
+  grid-template-columns: minmax(0, 1fr) 8rem 2.5rem;
   gap: ${({$theme}) => $theme.layout.gapHalf};
+  padding: ${({$theme}) => $theme.layout.gapQuarter};
   align-items: center;
+  border-block-start: 0.0625rem solid ${({$theme}) => $theme.palette.border};
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 type ProjectListItem = {
@@ -47,8 +55,12 @@ const ProjectListItem: FC<ProjectListItem> = ({project}) => {
   };
   return (
     <ProjectListItemWrapper $theme={theme}>
-      <div>{name}</div>
-      <div>{dayjs(ctime).format('ddd, D MMM, YYYY')}</div>
+      <EllipsisText h4 my={0}>
+        <NextLink href={`/project/${projectId}`} passHref>
+          <Link color>{name}</Link>
+        </NextLink>
+      </EllipsisText>
+      <div style={{textAlign: 'end'}}>{dayjs(ctime).format('ddd, D MMM, YYYY')}</div>
       <Button
         auto
         icon={<XIcon />}

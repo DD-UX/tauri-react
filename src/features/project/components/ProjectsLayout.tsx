@@ -14,12 +14,13 @@ import {GeistThemeProps} from 'lib/geist/geist-theme-models';
 
 const ProjectsListWrapper = styled.div<GeistThemeProps>`
   display: grid;
-  gap: ${({$theme}) => $theme.layout.gapHalf};
+  //gap: ${({$theme}) => $theme.layout.gapHalf};
 `;
 
 const ProjectsLayout: FC = () => {
   const theme = useTheme();
   const {isLoadingProjects, projects} = useContext(ProjectsContext);
+
   return (
     <LayoutWrapper $theme={theme}>
       <LayoutHeader $theme={theme} $fullWidth>
