@@ -1,5 +1,5 @@
 import {FC, useState} from 'react';
-import {Button, KeyCode, KeyMod, useKeyboard} from '@geist-ui/react';
+import {Button, Keyboard, KeyCode, KeyMod, Spacer, useKeyboard} from '@geist-ui/react';
 import Plus from '@geist-ui/react-icons/plus';
 import AddProjectForm from './AddProjectForm';
 
@@ -25,6 +25,10 @@ const AddProjectButton: FC = () => {
       onClick={() => setIsFormOpen(true)}
     >
       Add project
+      <Spacer inline w={0.5} />
+      <Keyboard command scale={0.5}>
+        N
+      </Keyboard>
     </Button>
   ) : (
     <AddProjectForm onClose={() => setIsFormOpen(false)} />
