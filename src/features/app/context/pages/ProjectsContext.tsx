@@ -32,9 +32,6 @@ export const ProjectsContextProvider: FC<PropsWithChildren<ProjectsContextProvid
     }
   }, [isLoadingProjects]);
 
-  console.log('projects', projects);
-  console.log('isLoadingProjects', isLoadingProjects);
-
   return (
     <ProjectsContext.Provider
       value={{

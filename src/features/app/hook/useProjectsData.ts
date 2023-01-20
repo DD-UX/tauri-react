@@ -1,14 +1,12 @@
-import {useCallback, useMemo, useRef} from 'react';
+import {useMemo, useState} from 'react';
 import {useToasts} from '@geist-ui/react';
-import useSWR from 'swr';
 
 import {Project} from 'lib/sdk/generated-models/Project';
-
-const SWR_PROJECTS_LIST_KEY = 'list_projects';
 
 type useProjectsDataValues = {
   projects: Project[];
   isLoadingProjects: boolean;
+  setSearch(projectName: string): void;
   refreshProjects(): void;
 };
 
@@ -17,43 +15,40 @@ type useProjectsDataValues = {
  */
 function useProjectsData(): useProjectsDataValues {
   const [, setToast] = useToasts();
-  const isInitialCallRef = useRef(true);
+  const [projectsData, setProjectsData] = useState<Project[]>([]);
+  const [search, setSearch] = useState('');
+  const [isLoadingProjects, setIsLoadingProjects] = useState(false);
 
-  const updateProjectsInfo = useCallback(async (_key: string) => {
-    if (window) {
-      try {
-        const {invoke} = await import('@tauri-apps/api');
-        const projectsList: Project[] = await invoke(SWR_PROJECTS_LIST_KEY, {});
-        return projectsList;
-      } catch (error) {
-        console.log('error', error);
-      }
-
-      return [];
+  const loadProjects = async () => {
+    if (!window?.__TAURI_IPC__) {
+      return;
     }
-    return [];
-  }, []);
 
-  const {data: projectsData, error, mutate: refreshProjectsData} = useSWR(
-    [SWR_PROJECTS_LIST_KEY, isInitialCallRef],
-    updateProjectsInfo
-  );
+    try {
+      setIsLoadingProjects(true);
+      const {invoke} = await import('@tauri-apps/api');
+      const projectsList: Project[] = await invoke('list_projects', {name: search});
+      setProjectsData(projectsList);
+    } catch (error) {
+      setToast({
+        text: 'An error occurred while loading projects.',
+        type: 'error'
+      });
+    } finally {
+      setIsLoadingProjects(false);
+    }
+  };
 
   const memoizedReturnValue: useProjectsDataValues = useMemo(() => {
     return {
-      projects: projectsData ?? [],
-      isLoadingProjects: !error && !projectsData,
-      refreshProjects: refreshProjectsData
+      projects: projectsData,
+      isLoadingProjects,
+      refreshProjects: loadProjects,
+      setSearch
     };
-  }, [projectsData, error, refreshProjectsData]);
-
-  if (error) {
-    setToast({
-      text: 'An error occurred while loading projects.',
-      type: 'error'
-    });
-  }
+  }, [projectsData, isLoadingProjects]);
 
   return memoizedReturnValue;
 }
+
 export default useProjectsData;
