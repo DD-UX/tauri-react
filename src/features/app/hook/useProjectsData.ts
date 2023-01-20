@@ -2,6 +2,7 @@ import {useMemo, useState} from 'react';
 import {useToasts} from '@geist-ui/react';
 
 import {Project} from 'lib/sdk/generated-models/Project';
+import getProjects from 'lib/sdk/methods/project/get-projects';
 
 type useProjectsDataValues = {
   projects: Project[];
@@ -20,14 +21,9 @@ function useProjectsData(): useProjectsDataValues {
   const [isLoadingProjects, setIsLoadingProjects] = useState(false);
 
   const loadProjects = async () => {
-    if (!window?.__TAURI_IPC__) {
-      return;
-    }
-
     try {
       setIsLoadingProjects(true);
-      const {invoke} = await import('@tauri-apps/api');
-      const projectsList: Project[] = await invoke('list_projects', {name: search});
+      const projectsList: Project[] = await getProjects({search});
       setProjectsData(projectsList);
     } catch (error) {
       setToast({
