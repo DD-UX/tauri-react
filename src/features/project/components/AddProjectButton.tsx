@@ -12,18 +12,17 @@ const AddProjectButton: FC = () => {
   const addProjectHandler = async (projectName: string) => {
     try {
       setIsCreatingProject(true);
-      const createdProject = await createProject({
+      await createProject({
         name: projectName
       });
-      console.log('project created', createdProject);
-      refreshProjects();
+      await refreshProjects();
       setToast({
-        text: 'Project created successfully',
+        text: `Project ${projectName} created successfully.`,
         type: 'success'
       });
     } catch (error) {
       setToast({
-        text: 'An error occurred while creating the project.',
+        text: `An error occurred while creating ${projectName} project.`,
         type: 'error'
       });
     } finally {

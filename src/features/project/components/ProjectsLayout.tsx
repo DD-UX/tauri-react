@@ -9,6 +9,13 @@ import {
 import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
 import AddProjectButton from 'features/project/components/AddProjectButton';
 import ProjectListItem from 'features/project/components/ProjectsListItem';
+import styled from 'styled-components';
+import {GeistThemeProps} from 'lib/geist/geist-theme-models';
+
+const ProjectsListWrapper = styled.div<GeistThemeProps>`
+  display: grid;
+  gap: ${({$theme}) => $theme.layout.gapHalf};
+`;
 
 const ProjectsLayout: FC = () => {
   const theme = useTheme();
@@ -27,9 +34,11 @@ const ProjectsLayout: FC = () => {
             List of projects
           </Text>
         )}
-        {projects?.map((project) => (
-          <ProjectListItem key={project.id} project={project} />
-        ))}
+        <ProjectsListWrapper $theme={theme}>
+          {projects?.map((project) => (
+            <ProjectListItem key={project.id} project={project} />
+          ))}
+        </ProjectsListWrapper>
         {projects?.length < 1 && <Text>No available projects</Text>}
       </LayoutContent>
     </LayoutWrapper>
