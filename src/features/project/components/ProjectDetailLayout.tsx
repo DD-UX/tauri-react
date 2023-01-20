@@ -29,8 +29,8 @@ const ProjectDetailLayout: FC = () => {
       </LayoutHeader>
       <LayoutColumn $theme={theme}>
         {projects?.map(({id, name}) => (
-          <EllipsisText my={0}>
-            <NextLink href={`/project/${id}`} passHref>
+          <EllipsisText key={id} my={0}>
+            <NextLink href={`/project/${id}`} passHref shallow>
               <Link color>{name}</Link>
             </NextLink>
           </EllipsisText>
