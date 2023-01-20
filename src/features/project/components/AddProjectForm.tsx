@@ -28,6 +28,10 @@ const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
     event.preventDefault();
     event.stopPropagation();
 
+    if (newProjectName.length < 1) {
+      return;
+    }
+
     try {
       setIsCreatingProject(true);
       await createProject({
@@ -67,6 +71,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
         icon={<Save />}
         htmlType="submit"
         loading={isCreatingProject}
+        disabled={newProjectName.length < 1}
         px={0.6}
         scale={0.75}
         type="success"

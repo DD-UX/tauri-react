@@ -9,6 +9,7 @@ const AddProjectButton: FC = () => {
   return !isFormOpen ? (
     <Button
       auto
+      autoFocus
       icon={<Plus />}
       px={0.6}
       scale={0.75}

@@ -15,7 +15,7 @@ const ProjectListItemWrapper = styled.div<GeistThemeProps>`
   grid-auto-flow: column;
   grid-template-columns: minmax(0, 1fr) 8rem 2.5rem;
   gap: ${({$theme}) => $theme.layout.gapHalf};
-  padding: ${({$theme}) => $theme.layout.gapQuarter};
+  padding: ${({$theme}) => $theme.layout.gapHalf} 0;
   align-items: center;
 
   & + & {
@@ -58,7 +58,7 @@ const ProjectListItem: FC<ProjectListItem> = ({project}) => {
   };
   return (
     <ProjectListItemWrapper $theme={theme}>
-      <EllipsisText h4 my={0}>
+      <EllipsisText h5 my={0}>
         <NextLink href={`/project/${projectId}`} passHref>
           <Link color>{name}</Link>
         </NextLink>
