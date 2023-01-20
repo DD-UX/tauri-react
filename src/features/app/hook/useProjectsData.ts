@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {useToasts} from '@geist-ui/react';
 
 import {Project} from 'lib/sdk/generated-models/Project';
@@ -34,6 +34,10 @@ function useProjectsData(): useProjectsDataValues {
       setIsLoadingProjects(false);
     }
   };
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
 
   const memoizedReturnValue: useProjectsDataValues = useMemo(() => {
     return {

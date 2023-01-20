@@ -1,13 +1,13 @@
 import {FC, useContext} from 'react';
-import {Button, Loading, Text, useTheme} from '@geist-ui/react';
+import {Loading, Text, useTheme} from '@geist-ui/react';
 import {
   LayoutContent,
   LayoutHeader,
   LayoutHeading,
   LayoutWrapper
 } from 'features/app/components/Layout';
-import Plus from '@geist-ui/react-icons/plus';
 import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
+import AddProjectButton from 'features/project/components/AddProjectButton';
 
 const ProjectsLayout: FC = () => {
   const theme = useTheme();
@@ -16,9 +16,7 @@ const ProjectsLayout: FC = () => {
     <LayoutWrapper $theme={theme}>
       <LayoutHeader $theme={theme} $fullWidth>
         <LayoutHeading>Projects</LayoutHeading>
-        <Button ml="auto" auto icon={<Plus />} px={0.6} scale={0.75} type="secondary" ghost>
-          Add project
-        </Button>
+        <AddProjectButton />
       </LayoutHeader>
       <LayoutContent $theme={theme} $fullWidth>
         {isLoadingProjects ? (

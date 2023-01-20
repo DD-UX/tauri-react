@@ -1,5 +1,6 @@
 import {Project} from '../../generated-models/Project';
 import {handleError} from '../../utility/error-handling-utility';
+import {ipc_invoke} from '../../utility/ipc';
 
 /**
  * @method getProjects
@@ -8,11 +9,7 @@ import {handleError} from '../../utility/error-handling-utility';
 const getProjects = async ({search}: {search: string}): Promise<Project[]> => {
   const functionalErrorCode = 'TauriTodo.project.getProjects';
   try {
-    if (!window?.__TAURI_IPC__) {
-      return [];
-    }
-    const {invoke} = await import('@tauri-apps/api');
-    const projectsList: Project[] = await invoke('list_projects', {name: search});
+    const projectsList: Project[] = await ipc_invoke('list_projects', {name: search});
     return projectsList;
   } catch (error) {
     handleError(functionalErrorCode, error);
