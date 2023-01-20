@@ -5,7 +5,8 @@ import {ipc_invoke} from '../../utility/ipc';
 
 /**
  * @method createProject
- * @return {Promise<ModelMutateResultData>} Id of the created project
+ * @param {Object} projectInfo Project info to be created
+ * @return {Promise<ModelMutateResultData>} ID of the created project
  */
 const createProject = async (
   projectInfo: ProjectForCreate

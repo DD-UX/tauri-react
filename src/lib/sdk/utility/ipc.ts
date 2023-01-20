@@ -1,6 +1,6 @@
 /**
  * @summary
- * Small wrapper on top of tauri api invoke *
+ * ipc_invoke: Small wrapper on top of tauri api invoke *
  * best-practice: Light and narrow external api abstraction.
  */
 export const ipc_invoke = async (method: string, params?: object): Promise<any> => {

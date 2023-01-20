@@ -8,6 +8,7 @@ import {
 } from 'features/app/components/Layout';
 import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
 import AddProjectButton from 'features/project/components/AddProjectButton';
+import ProjectListItem from 'features/project/components/ProjectsListItem';
 
 const ProjectsLayout: FC = () => {
   const theme = useTheme();
@@ -26,8 +27,8 @@ const ProjectsLayout: FC = () => {
             List of projects
           </Text>
         )}
-        {projects?.map(({id, name}) => (
-          <div key={id}>{name}</div>
+        {projects?.map((project) => (
+          <ProjectListItem key={project.id} project={project} />
         ))}
         {projects?.length < 1 && <Text>No available projects</Text>}
       </LayoutContent>
