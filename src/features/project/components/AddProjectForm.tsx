@@ -1,5 +1,5 @@
 import {FC, FormEvent, useContext, useState} from 'react';
-import {Button, Input, useTheme, useToasts} from '@geist-ui/react';
+import {Button, Input, KeyCode, useKeyboard, useTheme, useToasts} from '@geist-ui/react';
 import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
 import createProject from 'lib/sdk/methods/project/create-project';
 import styled from 'styled-components';
@@ -24,14 +24,29 @@ const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
   const [isCreatingProject, setIsCreatingProject] = useState(false);
   const [newProjectName, setNewProjectName] = useState('');
 
+  // This restores the field value and handles the close
+  const resetForm = () => {
+    onClose();
+    setNewProjectName('');
+  };
+
+  // Reset form on Escape
+  useKeyboard(() => {
+    resetForm();
+  }, [KeyCode.Escape]);
+
+  // Handle add project
   const addProjectHandler = async (event: FormEvent) => {
+    // Prevent form submit complete behavior through HTML
     event.preventDefault();
     event.stopPropagation();
 
+    // Avoid saving when name is empty
     if (newProjectName.length < 1) {
       return;
     }
 
+    // Handle creation
     try {
       setIsCreatingProject(true);
       await createProject({
@@ -42,8 +57,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
         text: `Project ${newProjectName} created successfully.`,
         type: 'success'
       });
-      onClose();
-      setNewProjectName('');
+      resetForm();
     } catch (error) {
       setToast({
         text: `An error occurred while creating ${newProjectName} project.`,
