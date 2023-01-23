@@ -23,7 +23,7 @@ export const LayoutColumn = styled.menu<GeistThemeProps>`
   grid-column-end: app-column-end;
 
   margin: 0; // reset menu component
-  background-color: ${({$theme}) => $theme.palette.accents_2};
+  background-color: ${({$theme}) => $theme.palette.accents_1};
   border-inline-end: 0.0625rem solid ${({$theme}) => $theme.palette.border};
   padding: ${({$theme}) => $theme.layout.gapHalf};
   height: 100%;

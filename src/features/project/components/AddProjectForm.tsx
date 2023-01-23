@@ -15,7 +15,7 @@ const AddProjectFormWrapper = styled.form<GeistThemeProps>`
 `;
 
 type AddProjectFormProps = {
-  onClose(): void;
+  onClose?(): void;
 };
 const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
   const [, setToast] = useToasts();
@@ -26,7 +26,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
 
   // This restores the field value and handles the close
   const resetForm = () => {
-    onClose();
+    onClose?.();
     setNewProjectName('');
   };
 
