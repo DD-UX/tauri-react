@@ -30,6 +30,12 @@ export const LayoutColumn = styled.menu<GeistThemeProps>`
   overflow: hidden;
 `;
 
+export const LayoutColumnHeader = styled.header<GeistThemeProps>`
+  display: flex;
+  justify-content: space-between;
+  gap: ${({$theme}) => $theme.layout.gapQuarter};
+`;
+
 export const LayoutHeader = styled.header<GeistThemeProps & {$fullWidth?: boolean}>`
   grid-row-start: app-header-start;
   grid-row-end: app-header-end;

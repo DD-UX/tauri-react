@@ -1,7 +1,18 @@
-import {FC, useContext, useMemo, useState} from 'react';
-import {Button, Keyboard, Link, Spacer, Text, useTheme} from '@geist-ui/react';
+import {FC, useContext, useMemo} from 'react';
+import {
+  Button,
+  Keyboard,
+  KeyCode,
+  KeyMod,
+  Link,
+  Spacer,
+  Text,
+  useKeyboard,
+  useTheme
+} from '@geist-ui/react';
 import {
   LayoutColumn,
+  LayoutColumnHeader,
   LayoutContent,
   LayoutHeader,
   LayoutHeading,
@@ -19,15 +30,25 @@ const ProjectDetailLayout: FC = () => {
   const {projectId} = router.query;
   const theme = useTheme();
   const {projects} = useContext(ProjectsContext);
-  // TODO get project details from its own context
+
   const selectedProject = useMemo(() => {
     return projects.find(({id}) => id === projectId);
   }, [projectId, projects]);
+
   const menuProject = useMemo(() => {
     return projects
       .filter(({id}) => id !== projectId)
       .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
   }, [projectId, projects]);
+
+  const handleGoBack = () => {
+    router.push('/');
+  };
+
+  // Reset form on Escape
+  useKeyboard(() => {
+    handleGoBack();
+  }, [KeyMod.CtrlCmd, KeyCode.KEY_B]);
 
   return (
     <LayoutWrapper $theme={theme}>
@@ -35,7 +56,7 @@ const ProjectDetailLayout: FC = () => {
         <LayoutHeading>{selectedProject?.name}</LayoutHeading>
       </LayoutHeader>
       <LayoutColumn $theme={theme}>
-        <div style={{display: 'flex', justifyContent: 'space-between', gap: theme.layout.gapHalf}}>
+        <LayoutColumnHeader $theme={theme}>
           <Button
             auto
             autoFocus
@@ -44,7 +65,7 @@ const ProjectDetailLayout: FC = () => {
             scale={0.75}
             type="secondary"
             ghost
-            onClick={() => router.push('/')}
+            onClick={handleGoBack}
           >
             Back
             <Spacer inline w={0.5} />
@@ -53,7 +74,7 @@ const ProjectDetailLayout: FC = () => {
             </Keyboard>
           </Button>
           <AddProjectForm />
-        </div>
+        </LayoutColumnHeader>
         <Spacer h={0.5} />
         <EllipsisText h3>Other projects</EllipsisText>
         {menuProject?.map(({id, name}) => (
