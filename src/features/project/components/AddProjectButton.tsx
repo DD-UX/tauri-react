@@ -11,7 +11,7 @@ const AddProjectButton: FC = () => {
     if (!isFormOpen) {
       setIsFormOpen(true);
     }
-  }, [KeyMod.CtrlCmd, KeyCode.KEY_N]);
+  }, [KeyMod.CtrlCmd, KeyCode.KEY_P]);
 
   return !isFormOpen ? (
     <Button
@@ -27,7 +27,7 @@ const AddProjectButton: FC = () => {
       Add project
       <Spacer inline w={0.5} />
       <Keyboard command scale={0.5}>
-        N
+        P
       </Keyboard>
     </Button>
   ) : (

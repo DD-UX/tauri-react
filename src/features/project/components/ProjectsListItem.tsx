@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {GeistThemeProps} from 'lib/geist/geist-theme-models';
 import XIcon from '@geist-ui/react-icons/x';
 import dayjs from 'dayjs';
-import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
+import {ProjectsContext} from 'features/app/context/ProjectsContext';
 import deleteProject from 'lib/sdk/methods/project/delete-project';
 import NextLink from 'next/link';
 import EllipsisText from 'features/app/components/common/EllipsisText';

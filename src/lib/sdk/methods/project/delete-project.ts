@@ -10,10 +10,10 @@ import {ipc_invoke} from '../../utility/ipc';
 const deleteProject = async (projectId: string): Promise<ModelMutateResultData | null> => {
   const functionalErrorCode = 'TauriTodo.project.deleteProject';
   try {
-    const createdProject: ModelMutateResultData = await ipc_invoke('delete_project', {
+    const deletedProject: ModelMutateResultData = await ipc_invoke('delete_project', {
       id: projectId
     });
-    return createdProject;
+    return deletedProject;
   } catch (error) {
     handleError(functionalErrorCode, error);
     throw error;

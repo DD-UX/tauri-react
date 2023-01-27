@@ -1,6 +1,6 @@
 import {createContext, FC, PropsWithChildren, useEffect, useState} from 'react';
 import {Project} from 'lib/sdk/generated-models/Project';
-import useProjectsData from '../../hook/useProjectsData';
+import useProjectsData from 'features/app/hook/useProjectsData';
 
 type ProjectsContextProviderProps = {
   onInitialized?: () => void;

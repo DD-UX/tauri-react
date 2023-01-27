@@ -1,12 +1,12 @@
 import {FC, FormEvent, useContext, useState} from 'react';
 import {Button, Input, KeyCode, useKeyboard, useTheme, useToasts} from '@geist-ui/react';
-import {ProjectsContext} from 'features/app/context/ProjectsContext';
-import createProject from 'lib/sdk/methods/project/create-project';
+import {ProjectContext} from 'features/app/context/pages/ProjectContext';
+import createTask from 'lib/sdk/methods/task/create-task';
 import styled from 'styled-components';
 import {GeistThemeProps} from 'lib/geist/geist-theme-models';
 import Save from '@geist-ui/react-icons/save';
 
-const AddProjectFormWrapper = styled.form<GeistThemeProps>`
+const AddTaskFormWrapper = styled.form<GeistThemeProps>`
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: minmax(6rem, 12rem) 2.5rem;
@@ -14,20 +14,16 @@ const AddProjectFormWrapper = styled.form<GeistThemeProps>`
   align-items: center;
 `;
 
-type AddProjectFormProps = {
-  onClose?(): void;
-};
-const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
+const AddTaskForm: FC = () => {
   const [, setToast] = useToasts();
   const theme = useTheme();
-  const {refreshProjects} = useContext(ProjectsContext);
-  const [isCreatingProject, setIsCreatingProject] = useState(false);
-  const [newProjectName, setNewProjectName] = useState('');
+  const {project, refreshProject} = useContext(ProjectContext);
+  const [isCreatingTask, setIsCreatingTask] = useState(false);
+  const [newTaskTitle, setNewTaskTitle] = useState('');
 
   // This restores the field value and handles the close
   const resetForm = () => {
-    onClose?.();
-    setNewProjectName('');
+    setNewTaskTitle('');
   };
 
   // Reset form on Escape
@@ -35,63 +31,64 @@ const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
     resetForm();
   }, [KeyCode.Escape]);
 
-  // Handle add project
-  const addProjectHandler = async (event: FormEvent) => {
+  // Handle add task
+  const addTaskHandler = async (event: FormEvent) => {
     // Prevent form submit complete behavior through HTML
     event.preventDefault();
     event.stopPropagation();
 
     // Avoid saving when name is empty
-    if (newProjectName.length < 1) {
+    if (newTaskTitle.length < 1) {
       return;
     }
 
     // Handle creation
     try {
-      setIsCreatingProject(true);
-      await createProject({
-        name: newProjectName
+      setIsCreatingTask(true);
+      await createTask({
+        title: newTaskTitle,
+        project_id: project.id
       });
-      await refreshProjects();
+      await refreshProject();
       setToast({
-        text: `Project ${newProjectName} created successfully.`,
+        text: `Task ${newTaskTitle} created successfully.`,
         type: 'success'
       });
       resetForm();
     } catch (error) {
       setToast({
-        text: `An error occurred while creating ${newProjectName} project.`,
+        text: `An error occurred while creating ${newTaskTitle} task.`,
         type: 'error'
       });
     } finally {
-      setIsCreatingProject(false);
+      setIsCreatingTask(false);
     }
   };
 
   return (
-    <AddProjectFormWrapper $theme={theme} onSubmit={addProjectHandler}>
+    <AddTaskFormWrapper $theme={theme} onSubmit={addTaskHandler}>
       <Input
         tabIndex={0}
         autoFocus
         width="100%"
-        initialValue={newProjectName}
-        value={newProjectName}
-        placeholder="New project name"
-        onChange={(event) => setNewProjectName(event.target.value)}
+        initialValue={newTaskTitle}
+        value={newTaskTitle}
+        placeholder="Add a task"
+        onChange={(event) => setNewTaskTitle(event.target.value)}
         clearable
       />
       <Button
         auto
         icon={<Save />}
         htmlType="submit"
-        loading={isCreatingProject}
-        disabled={newProjectName.length < 1}
+        loading={isCreatingTask}
+        disabled={newTaskTitle.length < 1}
         px={0.6}
         scale={0.75}
         type="success"
       />
-    </AddProjectFormWrapper>
+    </AddTaskFormWrapper>
   );
 };
 
-export default AddProjectForm;
+export default AddTaskForm;

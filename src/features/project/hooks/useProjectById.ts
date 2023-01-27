@@ -6,12 +6,12 @@ import getProjectWithTasks from 'lib/sdk/methods/project/get-project-with-tasks'
 const useProjectById = (projectId: string) => {
   const [, setToast] = useToasts();
   const [isLoading, setIsLoading] = useState(true);
-  const [project, setProject] = useState<ProjectWithTasks>();
+  const [project, setProject] = useState({} as ProjectWithTasks);
 
-  const loadProject = async (projectId: string) => {
+  const loadProject = async () => {
     try {
-      const latestProject = await getProjectWithTasks({projectId});
-      setProject(latestProject);
+      const projectWithTasks = await getProjectWithTasks({projectId});
+      setProject(projectWithTasks);
     } catch (error) {
       setToast({
         text: 'An error occurred while fetching project',
@@ -24,13 +24,14 @@ const useProjectById = (projectId: string) => {
 
   useEffect(() => {
     if (projectId) {
-      loadProject(projectId);
+      loadProject();
     }
   }, [projectId]);
 
   return {
     project,
-    isLoadingProject: isLoading
+    isLoadingProject: isLoading,
+    refreshProject: loadProject
   };
 };
 

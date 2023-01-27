@@ -1,16 +1,16 @@
 import {FC} from 'react';
 import Head from 'next/head';
-import {ProjectsContextProvider} from 'features/app/context/pages/ProjectsContext';
 import ProjectDetailLayout from 'features/project/components/ProjectDetailLayout';
+import {ProjectContextProvider} from 'features/app/context/pages/ProjectContext';
 
 const ProjectDetailPage: FC = () => {
   return (
-    <ProjectsContextProvider>
+    <ProjectContextProvider>
       <Head>
         <title>Projects</title>
       </Head>
       <ProjectDetailLayout />
-    </ProjectsContextProvider>
+    </ProjectContextProvider>
   );
 };
 

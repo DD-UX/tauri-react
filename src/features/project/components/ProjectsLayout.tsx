@@ -6,7 +6,7 @@ import {
   LayoutHeading,
   LayoutWrapper
 } from 'features/app/components/Layout';
-import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
+import {ProjectsContext} from 'features/app/context/ProjectsContext';
 import AddProjectButton from 'features/project/components/AddProjectButton';
 import ProjectListItem from 'features/project/components/ProjectsListItem';
 import styled from 'styled-components';

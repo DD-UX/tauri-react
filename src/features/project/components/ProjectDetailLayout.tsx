@@ -19,21 +19,22 @@ import {
   LayoutHeading,
   LayoutWrapper
 } from 'features/app/components/Layout';
-import {ProjectsContext} from 'features/app/context/pages/ProjectsContext';
+import {ProjectsContext} from 'features/app/context/ProjectsContext';
 import {useRouter} from 'next/router';
 import NextLink from 'next/link';
 import EllipsisText from 'features/app/components/common/EllipsisText';
 import AddProjectForm from './AddProjectForm';
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
-import useProjectById from 'features/project/hooks/useProjectById';
+import AddTaskForm from 'features/task/components/AddTaskForm';
+import {ProjectContext} from 'features/app/context/pages/ProjectContext';
+import TasksListItem from 'features/task/components/TasksListItem';
 
 const ProjectDetailLayout: FC = () => {
   const router = useRouter();
   const {projectId} = router.query;
   const theme = useTheme();
   const {projects} = useContext(ProjectsContext);
-
-  const {project: selectedProject, isLoadingProject} = useProjectById(String(projectId));
+  const {project: selectedProject, isLoadingProject} = useContext(ProjectContext);
 
   const menuProject = useMemo(() => {
     return projects
@@ -54,6 +55,7 @@ const ProjectDetailLayout: FC = () => {
     <LayoutWrapper $theme={theme}>
       <LayoutHeader $theme={theme}>
         <LayoutHeading>{selectedProject?.name}</LayoutHeading>
+        <AddTaskForm />
       </LayoutHeader>
       <LayoutColumn $theme={theme}>
         <LayoutColumnHeader $theme={theme}>
@@ -86,15 +88,11 @@ const ProjectDetailLayout: FC = () => {
         ))}
       </LayoutColumn>
       <LayoutContent $theme={theme}>
-        {isLoadingProject && <Loading>Loading project</Loading>}
-
-        {selectedProject?.tasks?.map(({id, title}) => (
-          <EllipsisText key={id} my={0}>
-            {title}
-          </EllipsisText>
+        {isLoadingProject && <Loading>Loading tasks</Loading>}
+        {selectedProject?.tasks?.map((task) => (
+          <TasksListItem key={task.id} task={task} />
         ))}
-
-        {selectedProject?.tasks && selectedProject?.tasks?.length < 1 && (
+        {selectedProject.tasks && selectedProject?.tasks?.length < 1 && (
           <Text>No available tasks</Text>
         )}
       </LayoutContent>
