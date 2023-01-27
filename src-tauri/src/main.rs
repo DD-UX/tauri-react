@@ -4,8 +4,19 @@
 )]
 
 use crate::ipc::{
-	create_project, create_task, delete_project, delete_task, get_project, get_project_with_tasks, get_task,
-	list_projects, list_tasks, update_project, update_task,
+	// Project
+	get_project,
+	get_project_with_tasks,
+	create_project,
+	update_project,
+	delete_project,
+	list_projects,
+	// Task
+	get_task,
+	create_task,
+	update_task,
+	delete_task,
+	list_tasks,
 };
 use crate::prelude::*;
 use model::{ProjectForCreate, TaskForCreate};

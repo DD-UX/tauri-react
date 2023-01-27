@@ -8,7 +8,7 @@ import {
 } from 'features/app/components/Layout';
 import {ProjectsContext} from 'features/app/context/ProjectsContext';
 import AddProjectButton from 'features/project/components/AddProjectButton';
-import ProjectListItem from 'features/project/components/ProjectsListItem';
+import ProjectListItem from 'features/project/components/ProjectListItem';
 import styled from 'styled-components';
 import {GeistThemeProps} from 'lib/geist/geist-theme-models';
 

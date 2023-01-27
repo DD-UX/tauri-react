@@ -27,7 +27,7 @@ import AddProjectForm from './AddProjectForm';
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
 import AddTaskForm from 'features/task/components/AddTaskForm';
 import {ProjectContext} from 'features/app/context/pages/ProjectContext';
-import TasksListItem from 'features/task/components/TasksListItem';
+import TasksListItem from 'features/task/components/TaskListItem';
 
 const ProjectDetailLayout: FC = () => {
   const router = useRouter();
