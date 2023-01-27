@@ -4,7 +4,7 @@
 )]
 
 use crate::ipc::{
-	create_project, create_task, delete_project, delete_task, get_project, get_task,
+	create_project, create_task, delete_project, delete_task, get_project, get_project_with_tasks, get_task,
 	list_projects, list_tasks, update_project, update_task,
 };
 use crate::prelude::*;
@@ -33,6 +33,7 @@ async fn main() -> Result<()> {
 		.invoke_handler(tauri::generate_handler![
 			// Project
 			get_project,
+			get_project_with_tasks,
 			create_project,
 			update_project,
 			delete_project,

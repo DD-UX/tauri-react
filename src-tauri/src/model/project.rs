@@ -13,6 +13,8 @@ use std::collections::BTreeMap;
 use std::sync::Arc;
 use surrealdb::sql::{Object, Value};
 use ts_rs::TS;
+use crate::model::{Task, TaskBmc, TaskFilter};
+use std::string::String;
 
 // region:    --- Project
 
@@ -38,6 +40,26 @@ impl TryFrom<Object> for Project {
 }
 
 // endregion: --- Project
+
+// region:    --- ProjectWithTasks
+
+#[derive(Serialize, TS, Debug)]
+#[ts(export, export_to = "../src/lib/sdk/generated-models/")]
+pub struct ProjectWithTasks {
+	pub id: String,
+	pub name: String,
+	pub ctime: String,
+	pub tasks: Vec<Task>
+}
+
+impl From<ProjectWithTasks> for Value {
+	fn from(val: ProjectWithTasks) -> Self {
+		val.into()
+	}
+}
+
+
+// endregion: --- ProjectWithTasks
 
 // region:    --- ProjectForCreate
 #[skip_serializing_none]
@@ -114,6 +136,27 @@ impl ProjectBmc {
 
 	pub async fn get(ctx: Arc<Ctx>, id: &str) -> Result<Project> {
 		bmc_get(ctx, Self::ENTITY, id).await
+	}
+
+	pub async fn get_with_tasks(ctx: Arc<Ctx>, id: &str) -> Result<ProjectWithTasks> {
+		let filter = TaskFilter {
+			project_id: Option::from(String::from(id))
+		};
+
+		let project: Result<Project> = Self::get(ctx.clone(),  id).await;
+		let tasks: Result<Vec<Task>> = TaskBmc::list(ctx, Some(filter)).await;
+
+		let project = project.unwrap();
+		let tasks = tasks.unwrap();
+
+		let project_with_tasks = ProjectWithTasks {
+			id: project.id,
+			name: project.name,
+			ctime: project.ctime.to_string(),
+			tasks
+		};
+
+		Ok(project_with_tasks)
 	}
 
 	pub async fn create(

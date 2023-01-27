@@ -5,6 +5,7 @@ import {
   KeyCode,
   KeyMod,
   Link,
+  Loading,
   Spacer,
   Text,
   useKeyboard,
@@ -24,6 +25,7 @@ import NextLink from 'next/link';
 import EllipsisText from 'features/app/components/common/EllipsisText';
 import AddProjectForm from './AddProjectForm';
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
+import useProjectById from 'features/project/hooks/useProjectById';
 
 const ProjectDetailLayout: FC = () => {
   const router = useRouter();
@@ -31,9 +33,7 @@ const ProjectDetailLayout: FC = () => {
   const theme = useTheme();
   const {projects} = useContext(ProjectsContext);
 
-  const selectedProject = useMemo(() => {
-    return projects.find(({id}) => id === projectId);
-  }, [projectId, projects]);
+  const {project: selectedProject, isLoadingProject} = useProjectById(String(projectId));
 
   const menuProject = useMemo(() => {
     return projects
@@ -86,7 +86,17 @@ const ProjectDetailLayout: FC = () => {
         ))}
       </LayoutColumn>
       <LayoutContent $theme={theme}>
-        <Text>No available tasks</Text>
+        {isLoadingProject && <Loading>Loading project</Loading>}
+
+        {selectedProject?.tasks?.map(({id, title}) => (
+          <EllipsisText key={id} my={0}>
+            {title}
+          </EllipsisText>
+        ))}
+
+        {selectedProject?.tasks && selectedProject?.tasks?.length < 1 && (
+          <Text>No available tasks</Text>
+        )}
       </LayoutContent>
     </LayoutWrapper>
   );

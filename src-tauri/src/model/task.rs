@@ -115,7 +115,7 @@ impl Patchable for TaskForUpdate {}
 
 #[derive(Deserialize, Debug)]
 pub struct TaskFilter {
-	project_id: Option<String>,
+	pub project_id: Option<String>,
 }
 
 impl From<TaskFilter> for Value {

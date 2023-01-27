@@ -3,10 +3,7 @@
 
 use super::{CreateParams, DeleteParams, GetParams, IpcResponse, ListParams, UpdateParams};
 use crate::ctx::Ctx;
-use crate::model::{
-	ModelMutateResultData, Project, ProjectBmc, ProjectFilter, ProjectForCreate,
-	ProjectForUpdate,
-};
+use crate::model::{ModelMutateResultData, Project, ProjectBmc, ProjectFilter, ProjectForCreate, ProjectForUpdate, ProjectWithTasks};
 use crate::prelude::*;
 use tauri::{command, AppHandle, Wry};
 
@@ -14,6 +11,14 @@ use tauri::{command, AppHandle, Wry};
 pub async fn get_project(app: AppHandle<Wry>, params: GetParams) -> IpcResponse<Project> {
 	match Ctx::from_app(app) {
 		Ok(ctx) => ProjectBmc::get(ctx, &params.id).await.into(),
+		Err(_) => Err(Error::CtxFail).into(),
+	}
+}
+
+#[command]
+pub async fn get_project_with_tasks(app: AppHandle<Wry>, params: GetParams) -> IpcResponse<ProjectWithTasks> {
+	match Ctx::from_app(app) {
+		Ok(ctx) => ProjectBmc::get_with_tasks(ctx, &params.id).await.into(),
 		Err(_) => Err(Error::CtxFail).into(),
 	}
 }
