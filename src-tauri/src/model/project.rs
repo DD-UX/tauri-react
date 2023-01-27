@@ -52,9 +52,17 @@ pub struct ProjectWithTasks {
 	pub tasks: Vec<Task>
 }
 
-impl From<ProjectWithTasks> for Value {
-	fn from(val: ProjectWithTasks) -> Self {
-		val.into()
+impl From<(Project, Vec<Task>)> for ProjectWithTasks {
+	fn from(val:(Project,Vec<Task>)) -> Self {
+		let project = val.0;
+		let project_with_tasks = ProjectWithTasks {
+			id: project.id,
+			name: project.name,
+			ctime: project.ctime,
+			tasks: val.1,
+		};
+
+		project_with_tasks
 	}
 }
 
@@ -143,20 +151,11 @@ impl ProjectBmc {
 			project_id: Option::from(String::from(id))
 		};
 
-		let project: Result<Project> = Self::get(ctx.clone(),  id).await;
-		let tasks: Result<Vec<Task>> = TaskBmc::list(ctx, Some(filter)).await;
+		let project: Project = Self::get(ctx.clone(),  id).await.unwrap();
+		let tasks: Vec<Task> = TaskBmc::list(ctx, Some(filter)).await.unwrap();
 
-		let project = project.unwrap();
-		let tasks = tasks.unwrap();
 
-		let project_with_tasks = ProjectWithTasks {
-			id: project.id,
-			name: project.name,
-			ctime: project.ctime.to_string(),
-			tasks
-		};
-
-		Ok(project_with_tasks)
+		Ok((project, tasks).into())
 	}
 
 	pub async fn create(
