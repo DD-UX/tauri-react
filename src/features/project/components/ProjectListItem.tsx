@@ -4,11 +4,11 @@ import {Project} from 'lib/sdk/generated-models/Project';
 import styled from 'styled-components';
 import {GeistThemeProps} from 'lib/geist/geist-theme-models';
 import XIcon from '@geist-ui/react-icons/x';
-import dayjs from 'dayjs';
 import {ProjectsContext} from 'features/app/context/ProjectsContext';
 import deleteProject from 'lib/sdk/methods/project/delete-project';
 import NextLink from 'next/link';
 import EllipsisText from 'features/app/components/common/EllipsisText';
+import {formatNanoDateTime} from 'features/app/hook/date-helpers';
 
 const ProjectListItemWrapper = styled.div<GeistThemeProps>`
   display: grid;
@@ -63,7 +63,7 @@ const ProjectListItem: FC<ProjectListItem> = ({project}) => {
           <Link color>{name}</Link>
         </NextLink>
       </EllipsisText>
-      <div style={{textAlign: 'end'}}>{dayjs(ctime).format('ddd, D MMM, YYYY')}</div>
+      <div style={{textAlign: 'end'}}>{formatNanoDateTime(ctime)}</div>
       <Button
         auto
         icon={<XIcon />}

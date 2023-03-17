@@ -3,13 +3,13 @@ import {Button, Toggle, useTheme, useToasts} from '@geist-ui/react';
 import styled from 'styled-components';
 import {GeistThemeProps} from 'lib/geist/geist-theme-models';
 import XIcon from '@geist-ui/react-icons/x';
-import dayjs from 'dayjs';
 import EllipsisText from 'features/app/components/common/EllipsisText';
 import {Task} from 'lib/sdk/generated-models/Task';
 import deleteTask from 'lib/sdk/methods/task/delete-task';
 import {ProjectContext} from 'features/app/context/pages/ProjectContext';
 import updateTask from 'lib/sdk/methods/task/update-task';
 import {TaskForUpdate} from 'lib/sdk/generated-models/TaskForUpdate';
+import {formatNanoDateTime} from 'features/app/hook/date-helpers';
 
 const TaskListItemWrapper = styled.div<GeistThemeProps>`
   display: grid;
@@ -92,7 +92,7 @@ const TaskListItem: FC<TaskListItem> = ({task}) => {
       <EllipsisText h5 my={0}>
         {title}
       </EllipsisText>
-      <div style={{textAlign: 'end'}}>{dayjs(ctime).format('ddd, D MMM, YYYY')}</div>
+      <div style={{textAlign: 'end'}}>{formatNanoDateTime(ctime)}</div>
       <Button
         auto
         icon={<XIcon />}

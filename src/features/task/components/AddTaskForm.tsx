@@ -68,12 +68,12 @@ const AddTaskForm: FC = () => {
   return (
     <AddTaskFormWrapper $theme={theme} onSubmit={addTaskHandler}>
       <Input
-        tabIndex={0}
+        tabIndex={-1}
         autoFocus
         width="100%"
         initialValue={newTaskTitle}
         value={newTaskTitle}
-        placeholder="Add a task"
+        placeholder="New task"
         onChange={(event) => setNewTaskTitle(event.target.value)}
         clearable
       />
