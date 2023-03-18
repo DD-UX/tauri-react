@@ -7,7 +7,7 @@ import {motion} from 'framer-motion';
 export const LayoutWrapper = styled.div<GeistThemeProps>`
   display: grid;
   grid-template-rows:
-    [app-header-start] 3.5rem [app-header-end] 0
+    [app-header-start] 3.6rem [app-header-end] 0
     [app-content-start] minmax(0, 1fr) [app-content-end];
   grid-template-columns:
     [app-column-start] 20rem [app-column-end] 0

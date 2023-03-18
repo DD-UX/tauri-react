@@ -13,25 +13,29 @@ const AddProjectButton: FC = () => {
     }
   }, [KeyMod.CtrlCmd, KeyCode.KEY_P]);
 
-  return !isFormOpen ? (
-    <Button
-      auto
-      autoFocus
-      icon={<Plus />}
-      px={0.6}
-      scale={0.75}
-      type="secondary"
-      ghost
-      onClick={() => setIsFormOpen(true)}
-    >
-      Add project
-      <Spacer inline w={0.5} />
-      <Keyboard command scale={0.5}>
-        P
-      </Keyboard>
-    </Button>
-  ) : (
-    <AddProjectForm onClose={() => setIsFormOpen(false)} />
+  return (
+    <div style={{marginInlineStart: 'auto'}}>
+      {!isFormOpen ? (
+        <Button
+          auto
+          autoFocus
+          icon={<Plus />}
+          px={0.6}
+          scale={0.75}
+          type="secondary"
+          ghost
+          onClick={() => setIsFormOpen(true)}
+        >
+          Add project
+          <Spacer inline w={0.5} />
+          <Keyboard command scale={0.5}>
+            P
+          </Keyboard>
+        </Button>
+      ) : (
+        <AddProjectForm onClose={() => setIsFormOpen(false)} />
+      )}
+    </div>
   );
 };
 
