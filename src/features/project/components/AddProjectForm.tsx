@@ -15,9 +15,10 @@ const AddProjectFormWrapper = styled.form<GeistThemeProps>`
 `;
 
 type AddProjectFormProps = {
+  focusPriority?: boolean;
   onClose?(): void;
 };
-const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
+const AddProjectForm: FC<AddProjectFormProps> = ({focusPriority = true, onClose}) => {
   const [, setToast] = useToasts();
   const theme = useTheme();
   const {refreshProjects} = useContext(ProjectsContext);
@@ -71,14 +72,13 @@ const AddProjectForm: FC<AddProjectFormProps> = ({onClose}) => {
   return (
     <AddProjectFormWrapper $theme={theme} onSubmit={addProjectHandler}>
       <Input
-        tabIndex={0}
-        autoFocus
+        autoFocus={focusPriority}
+        tabIndex={-1}
         width="100%"
         initialValue={newProjectName}
         value={newProjectName}
         placeholder="New project name"
         onChange={(event) => setNewProjectName(event.target.value)}
-        clearable
       />
       <Button
         auto

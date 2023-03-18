@@ -12,6 +12,7 @@ const AddTaskFormWrapper = styled.form<GeistThemeProps>`
   grid-template-columns: minmax(6rem, 12rem) 2.5rem;
   gap: ${({$theme}) => $theme.layout.gapQuarter};
   align-items: center;
+  margin-inline-start: auto;
 `;
 
 const AddTaskForm: FC = () => {
@@ -68,7 +69,7 @@ const AddTaskForm: FC = () => {
   return (
     <AddTaskFormWrapper $theme={theme} onSubmit={addTaskHandler}>
       <Input
-        tabIndex={-1}
+        tabIndex={0}
         autoFocus
         width="100%"
         initialValue={newTaskTitle}

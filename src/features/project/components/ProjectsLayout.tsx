@@ -11,6 +11,7 @@ import AddProjectButton from 'features/project/components/AddProjectButton';
 import ProjectListItem from 'features/project/components/ProjectListItem';
 import styled from 'styled-components';
 import {GeistThemeProps} from 'lib/geist/geist-theme-models';
+import {AnimatePresence} from 'framer-motion';
 
 const ProjectsListWrapper = styled.div<GeistThemeProps>`
   display: grid;
@@ -27,15 +28,18 @@ const ProjectsLayout: FC = () => {
         <LayoutHeading>Projects</LayoutHeading>
         <AddProjectButton />
       </LayoutHeader>
-      <LayoutContent $theme={theme} $fullWidth>
-        {isLoadingProjects && <Loading>Loading projects</Loading>}
-        <ProjectsListWrapper $theme={theme}>
-          {projects?.map((project) => (
-            <ProjectListItem key={project.id} project={project} />
-          ))}
-        </ProjectsListWrapper>
-        {projects?.length < 1 && <Text>No available projects</Text>}
-      </LayoutContent>
+
+      <AnimatePresence mode="wait">
+        <LayoutContent $theme={theme} $fullWidth>
+          {isLoadingProjects && <Loading>Loading projects</Loading>}
+          <ProjectsListWrapper $theme={theme}>
+            {projects?.map((project) => (
+              <ProjectListItem key={project.id} project={project} />
+            ))}
+          </ProjectsListWrapper>
+          {projects?.length < 1 && <Text>No available projects</Text>}
+        </LayoutContent>
+      </AnimatePresence>
     </LayoutWrapper>
   );
 };

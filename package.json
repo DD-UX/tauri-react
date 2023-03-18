@@ -12,9 +12,10 @@
   "dependencies": {
     "@geist-ui/react": "2.2.0",
     "@geist-ui/react-icons": "1.0.1",
-    "@tauri-apps/api": "1.2.0",
     "@next/font": "13.1.2",
+    "@tauri-apps/api": "1.2.0",
     "dayjs": "1.10.5",
+    "framer-motion": "^10.6.0",
     "next": "13.1.2",
     "polished": "4.2.2",
     "react": "18.2.0",
