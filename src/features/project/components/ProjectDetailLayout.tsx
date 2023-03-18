@@ -63,7 +63,7 @@ const ProjectDetailLayout: FC = () => {
   // Reset form on Escape
   useKeyboard(() => {
     handleGoBack();
-  }, [KeyMod.CtrlCmd, KeyCode.KEY_B]);
+  }, [KeyMod.CtrlCmd, KeyCode.KEY_L]);
 
   // Toggle menu
   useKeyboard(() => {
@@ -117,10 +117,10 @@ const ProjectDetailLayout: FC = () => {
                 ghost
                 onClick={handleGoBack}
               >
-                Back
+                List
                 <Spacer inline w={0.5} />
                 <Keyboard command scale={0.5}>
-                  B
+                  L
                 </Keyboard>
               </Button>
               <AddProjectForm focusPriority={false} />
